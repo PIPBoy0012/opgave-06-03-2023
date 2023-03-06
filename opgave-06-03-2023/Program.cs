@@ -28,18 +28,25 @@ using (var reader = new StreamReader("Prisliste.csv"))
             VareList.Add(new Vare(strVare[0], itemUpdater(strVare[1]), strVare[2], float.Parse(strVare[3].Substring(0, strVare[3].Length - 2)), float.Parse(strVare[4]), priceGroupUpdate(strVare[5]), DateTime.Parse(strVare[6])));
         }
        i++;
-        
-    }
 
+    }
+    // Her åbner jeg eller laver en ny file og åbner, alt efter om den allerede existere
     var writer = File.Open("NyPrisliste.csv", FileMode.OpenOrCreate, FileAccess.Write);
     foreach (Vare vare in VareList)
     {
+        
         string text = vare.item + ";" + vare.articleDescription + ";" + vare.kostPrisDkk + "Dkk;" + vare.SlagsPris.ToString() + "Dkk;\n";
+        //Her encoder jeg texten til bytes som jeg så skriver i filen og Men den oven stående string(text)
         byte[] bytes = System.Text.Encoding.UTF8.GetBytes(text);
         
+        //her skriver den det
         writer.Write(bytes);
     }
+    // her lukker jeg filen så den ikke er i bruge af programmet så jeg faktisk kan åbne filen efter jeg er færdig med at skrive til den
     writer.Close();
+
+    //Bare så programmet ikke lukker når den er færdig(for debugging skyld)
+    Console.Read();
     Console.Read();
 }
 
