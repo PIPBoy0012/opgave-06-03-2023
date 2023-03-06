@@ -47,7 +47,7 @@ using (var reader = new StreamReader("Prisliste.csv"))
 
     //Bare så programmet ikke lukker når den er færdig(for debugging skyld)
     Console.Read();
-    Console.Read();
+
 }
 
 
